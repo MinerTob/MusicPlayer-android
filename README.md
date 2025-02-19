@@ -88,7 +88,10 @@
 +```
 
 ## 安装部署 📲
-    https://github.com/MinerTob/MusicPlayer-android/releases/tag/release1.2.0
+### 从Release下载
+1. 访问 [GitHub Releases](https://github.com/MinerTob/MusicPlayer-android/releases/tag/release1.2.0)
+2. 下载最新版APK
+3. 按照系统提示安装
 
 ### 从源码运行
 1. 克隆仓库
