@@ -7,12 +7,27 @@
 
     <style name="Theme.MusicPlayer" parent="Base.Theme.MusicPlayer" />
 
+    <!-- 自定义 ActionBar 样式 -->
+    <style name="CustomActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@android:color/white</item>
+        <item name="titleTextStyle">@style/CustomActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="CustomActionBar.TitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- 修改 Theme.Player，将原橙色改为白色，并应用自定义 ActionBar 样式 -->
     <style name="Theme.Player" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@android:color/holo_orange_dark</item>
+        <!-- 设置白色背景 -->
+        <item name="colorPrimary">@android:color/white</item>
+        <!-- 如无特殊需要，保留或调整 colorPrimaryVariant -->
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <!-- 指定标题文字颜色为黑色 -->
+        <item name="colorOnPrimary">@android:color/black</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- 使用自定义 ActionBar 样式 -->
+        <item name="actionBarStyle">@style/CustomActionBar</item>
     </style>
 
 

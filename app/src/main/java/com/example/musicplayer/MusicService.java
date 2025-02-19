@@ -21,14 +21,30 @@ public class MusicService extends Service {
     ExoPlayer player;
     List<MediaItem> mediaItems = new ArrayList<>();
     int currentTrackIndex = 0;
-    int playMode = Player.REPEAT_MODE_ALL; // 默认为顺序播放
+    public static final int MODE_NORMAL = Player.REPEAT_MODE_OFF; // 顺序播放
+    public static final int MODE_LOOP_ONE = Player.REPEAT_MODE_ONE; // 单曲循环
+    int playMode = MODE_NORMAL; // 默认普通模式
     boolean prepared = false;
-
-
 
     public void init() {
         if (player == null) {
             player = new ExoPlayer.Builder(MusicService.this).build(); // 创建播放器
+
+            // 添加播放状态监听，同时监控播放列表中文件切换的回调
+            player.addListener(new Player.Listener() {
+                @Override
+                public void onPlaybackStateChanged(int state) {
+                    if (state == Player.STATE_ENDED) {
+                        handlePlaybackCompleted();
+                    }
+                }
+
+                @Override
+                public void onMediaItemTransition(MediaItem mediaItem, int reason) {
+                    // 每次播放器自动切换到新曲目时，更新 currentTrackIndex
+                    currentTrackIndex = player.getCurrentMediaItemIndex();
+                }
+            });
 
             try {
                 // 获取 assets/music 文件夹中的所有音乐文件
@@ -72,13 +88,13 @@ public class MusicService extends Service {
                 MediaItem mediaItem = mediaItems.get(i);
                 String fileName = getFileNameFromMediaItem(mediaItem);
                 if (fileName.equals(name)) {
+                    currentTrackIndex = i; // 更新当前播放索引
                     player.seekTo(i, 0);
                     player.play();
                     break;
                 }
             }
         }
-
     }
 
     public String getFileNameFromMediaItem(MediaItem mediaItem) {
@@ -87,21 +103,25 @@ public class MusicService extends Service {
     }
 
     public void playNextTrack() {
-        currentTrackIndex++;
-        if (currentTrackIndex >= mediaItems.size()) {
-            currentTrackIndex = 0; // 如果超出了列表范围，回到第一首
+        if (playMode == MODE_LOOP_ONE) {
+            player.seekTo(0); // 单曲循环时重置进度
+            player.play();
+        } else {
+            currentTrackIndex = (currentTrackIndex + 1) % mediaItems.size();
+            player.seekTo(currentTrackIndex, 0);
+            player.play();
         }
-        player.seekToDefaultPosition(currentTrackIndex);
-        player.play();
     }
 
     public void playPreviousTrack() {
-        currentTrackIndex--;
-        if (currentTrackIndex < 0) {
-            currentTrackIndex = mediaItems.size() - 1; // 如果低于列表范围，回到最后一首
+        if (playMode == MODE_LOOP_ONE) {
+            player.seekTo(0); // 单曲循环时重置进度
+            player.play();
+        } else {
+            currentTrackIndex = (currentTrackIndex - 1 + mediaItems.size()) % mediaItems.size();
+            player.seekTo(currentTrackIndex, 0);
+            player.play();
         }
-        player.seekToDefaultPosition(currentTrackIndex);
-        player.play();
     }
 
     public void seekTo(long position) {
@@ -109,10 +129,11 @@ public class MusicService extends Service {
             player.seekTo(position);
         }
     }
+
     // 获取当前播放进度
     public long getContentPosition() {
         if (player != null) {
-            return  player.getCurrentPosition();
+            return player.getCurrentPosition();
         }
         return 0;
     }
@@ -136,15 +157,33 @@ public class MusicService extends Service {
 
     // 获取当前播放模式
     public int getPlayMode() {
-        return playMode;
+        return player.getRepeatMode();
     }
 
     // 设置播放模式
     public void setPlayMode(int mode) {
         playMode = mode;
-        player.setRepeatMode(playMode); // 更新播放模式
+        player.setRepeatMode(playMode);
+        // 当设置为单曲循环时强制更新索引
+        if (playMode == MODE_LOOP_ONE) {
+            currentTrackIndex = player.getCurrentMediaItemIndex();
+        }
     }
 
+    // 新增播放完成处理
+    private void handlePlaybackCompleted() {
+        if (playMode == MODE_LOOP_ONE) {
+            // 单曲循环模式下，重置当前歌曲的播放进度
+            player.seekTo(0);
+            player.play();
+        } else {
+            // 列表循环模式：自动切换到下一首
+            // 如果当前已经是最后一首，则 (currentTrackIndex + 1) % mediaItems.size() 会等于 0，回到第一首
+            currentTrackIndex = (currentTrackIndex + 1) % mediaItems.size();
+            player.seekTo(currentTrackIndex, 0);
+            player.play();
+        }
+    }
 
     // 绑定 MusicService
     public class LocalBinder extends Binder {
@@ -170,6 +209,10 @@ public class MusicService extends Service {
         super.onDestroy();
         if (player != null) {
             player.stop();
+            // 添加释放前检查
+            if (player.isPlaying()) {
+                player.stop();
+            }
             player.release();
             player = null;
         }
