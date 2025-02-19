@@ -50,7 +50,25 @@
 - 包含了 `SeekBar`、`ImageButton`、`ListView`、`TextView` 等控件，实现了直观的播放控制和信息展示。
 
 @@ ## 项目结构
-
+-音径播放器/
+-│
+-├── 应用程序/
+-    ├── 来源/
+-    │   ├── 主打/
+-    │   │   ├── java/com/example/musicplayer/
+-    │   │   │   ├── MainActivity.java
+-    │   │   │   ├── MusicService.java
+-    │   │   │   ├── LyricManager.java
+-    │   │   │   ├── Dandelion_Promise.java
+-    │   │   │   └── Counting_Stars.java
+-    │   ├── res/
+-    │   │   ├── 版面/
+-    │   │   │   └── activity_main.xml
+-    │   │   └── ...(其他资源文件)
+-    │   └── AndroidManifest.xml
+-    └── ...(其他项目配置)
+-└── README.md
++```text
 +音径播放器/
 +│
 +├── 应用程序/
@@ -69,6 +87,7 @@
 +    │   └── AndroidManifest.xml
 +    └── ...(其他项目配置)
 +└── README.md
++```
 
 ## 使用说明
 
