@@ -4,14 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,37 +76,33 @@ public class MainActivity extends AppCompatActivity {
                     long position = musicService.getContentPosition();
                     long duration = musicService.getDuration();
 
-                    // 更新当前进度文本
+                    // 更新当前播放进度和总时长
                     tv_seekBarHint.setText(format(position));
-                    // 更新歌曲总时长文本
                     tv_duration.setText(format(duration));
-
-                    // 更新进度条进度
                     seekBar.setMax((int) duration);
                     seekBar.setProgress((int) position);
 
-                    // 获取当前歌曲文件名
+                    // 获取当前播放歌曲（确保文件名与 LRC 文件名一致，例如 "蒲公英的约定.mp3"）
                     String currentSong = musicService.getCurrentSongName();
 
-                    // 【新增】更新歌名显示（调用已有的 updateSongName 方法去除 .mp3 后缀后显示）
+                    // 更新歌名显示（可在此处对文件名进行去除 .mp3 后缀等处理）
                     updateSongName(currentSong);
 
-                    // 更新歌手信息
-                    String singer = LyricManager.getSinger(currentSong);
+                    // 获取并更新歌手信息（不再调用 Dandelion_Promise 或 Counting_Stars，而是通过 LyricManager 动态解析 LRC
+                    // 文件）
+                    String singer = LyricManager.getSinger(currentSong, MainActivity.this);
                     tv_singer.setText(singer);
 
-                    // 更新歌词文本
-                    Class<?> lyricClass = LyricManager.getLyricClass(currentSong);
-                    try {
-                        int index = (int) lyricClass.getMethod("findLyricIndex", long.class).invoke(null, position);
-                        String[] texts = (String[]) lyricClass.getField("LYRIC_TEXTS").get(null);
-
-                        if (index >= 0 && index < texts.length) {
-                            tv_lyrics.setText(texts[index]);
+                    // 获取当前歌词数据，清空对旧歌词类的调用
+                    LyricManager.Lyric lyric = LyricManager.getLyric(currentSong, MainActivity.this);
+                    if (lyric != null && lyric.lyrics != null) {
+                        int index = lyric.findLyricIndex(position);
+                        if (index >= 0 && index < lyric.lyrics.size()) {
+                            tv_lyrics.setText(lyric.lyrics.get(index));
                         } else {
                             tv_lyrics.setText("");
                         }
-                    } catch (Exception e) {
+                    } else {
                         tv_lyrics.setText("");
                     }
                 }
