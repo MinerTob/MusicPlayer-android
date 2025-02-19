@@ -1,4 +1,4 @@
-# MelodyFlow 音乐播放器 🎵
+# MelodyFlow 音径播放器 🎵
 
 [![GitHub license](https://img.shields.io/github/license/yourname/melodyflow)](https://github.com/yourname/melodyflow/blob/main/LICENSE)
 [![Android CI](https://github.com/yourname/melodyflow/actions/workflows/android.yml/badge.svg)](https://github.com/yourname/melodyflow/actions/workflows/android.yml)
@@ -19,9 +19,10 @@
 ## 快速入门 🚀
 
 1. 将音乐文件放入 `app/src/main/assets/music/`
-2. 构建并运行应用
-3. 点击播放列表选择歌曲
-4. 使用控制面板管理播放
+2. 将歌词文件放入 `app/src/main/assets/lyrics/`
+3. 构建并运行应用
+4. 点击播放列表选择歌曲
+5. 使用控制面板管理播放
 
 **提示**：支持手势操作 - 滑动进度条可快速定位播放位置
 
