@@ -1,0 +1,19 @@
+<lint-module
+    format="1"
+    dir="D:\JAVA\MusicPlayer1.3.0\app"
+    name=":app"
+    type="APP"
+    maven="MusicPlayer:app:unspecified"
+    agpVersion="8.4.0"
+    buildFolder="build"
+    bootClassPath="D:\Android\platforms\android-34\android.jar;D:\Android\build-tools\34.0.0\core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-34"
+    neverShrinking="true">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

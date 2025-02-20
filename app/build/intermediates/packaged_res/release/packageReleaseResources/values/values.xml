@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black">#FF000000</color>
+    <color name="gray">#333333</color>
+    <color name="light_sky_blue">#B0E2FF</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="ripple_blue">#1E90FF</color>
+    <color name="sky_blue">#87CEEB</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="action_bar_title">音径播放器</string>
+    <string name="app_name">音径播放器</string>
+    <style name="Base.Theme.MusicPlayer" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="CustomActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@android:color/white</item>
+        <item name="titleTextStyle">@style/CustomActionBar.TitleTextStyle</item>
+    </style>
+    <style name="CustomActionBar.TitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    <style name="Theme.MusicPlayer" parent="Base.Theme.MusicPlayer"/>
+    <style name="Theme.Player" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        
+        <item name="colorPrimary">@android:color/white</item>
+        
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        
+        <item name="colorOnPrimary">@android:color/black</item>
+        <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimaryVariant</item>
+        
+        <item name="actionBarStyle">@style/CustomActionBar</item>
+    </style>
+</resources>

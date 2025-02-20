@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.musicplayer.app-mergeReleaseResources-2:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "D:\\greadle\\gradle_repositury\\caches\\transforms-4\\9187079f6979aeadafba776eee436550\\transformed\\appcompat-1.6.1\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,143 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.musicplayer"
+4    android:versionCode="1"
+5    android:versionName="1.3.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="29"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->[com.google.android.exoplayer:exoplayer-core:2.19.1] D:\greadle\gradle_repositury\caches\transforms-4\b564f4f28001267b1154f34156d7279f\transformed\exoplayer-core-2.19.1\AndroidManifest.xml:24:5-79
+11-->[com.google.android.exoplayer:exoplayer-core:2.19.1] D:\greadle\gradle_repositury\caches\transforms-4\b564f4f28001267b1154f34156d7279f\transformed\exoplayer-core-2.19.1\AndroidManifest.xml:24:22-76
+12
+13    <permission
+13-->[androidx.core:core:1.13.0] D:\greadle\gradle_repositury\caches\transforms-4\0d112f4a418736808cb41f4c190caa55\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
+14        android:name="com.example.musicplayer.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+14-->[androidx.core:core:1.13.0] D:\greadle\gradle_repositury\caches\transforms-4\0d112f4a418736808cb41f4c190caa55\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
+15        android:protectionLevel="signature" />
+15-->[androidx.core:core:1.13.0] D:\greadle\gradle_repositury\caches\transforms-4\0d112f4a418736808cb41f4c190caa55\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
+16
+17    <uses-permission android:name="com.example.musicplayer.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+17-->[androidx.core:core:1.13.0] D:\greadle\gradle_repositury\caches\transforms-4\0d112f4a418736808cb41f4c190caa55\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
+17-->[androidx.core:core:1.13.0] D:\greadle\gradle_repositury\caches\transforms-4\0d112f4a418736808cb41f4c190caa55\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
+18
+19    <application
+19-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:5:5-29:19
+20        android:allowBackup="true"
+20-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:6:9-35
+21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+21-->[androidx.core:core:1.13.0] D:\greadle\gradle_repositury\caches\transforms-4\0d112f4a418736808cb41f4c190caa55\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
+22        android:dataExtractionRules="@xml/data_extraction_rules"
+22-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:7:9-65
+23        android:debuggable="true"
+24        android:extractNativeLibs="false"
+25        android:fullBackupContent="@xml/backup_rules"
+25-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:8:9-54
+26        android:icon="@drawable/icon"
+26-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:9:9-38
+27        android:label="@string/app_name"
+27-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:10:9-41
+28        android:roundIcon="@mipmap/ic_launcher_round"
+28-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:11:9-54
+29        android:supportsRtl="true"
+29-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:12:9-35
+30        android:testOnly="true"
+31        android:theme="@style/Theme.Player" >
+31-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:13:9-44
+32        <service
+32-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:15:9-18:47
+33            android:name="com.example.musicplayer.MusicService"
+33-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:16:13-41
+34            android:enabled="true"
+34-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:17:13-35
+35            android:exported="true" />
+35-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:18:13-36
+36
+37        <activity
+37-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:20:9-28:20
+38            android:name="com.example.musicplayer.MainActivity"
+38-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:21:13-41
+39            android:exported="true" >
+39-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:22:13-36
+40            <intent-filter>
+40-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:23:13-27:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:24:17-69
+41-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:24:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:26:17-77
+43-->D:\JAVA\MusicPlayer1.3.0\app\src\main\AndroidManifest.xml:26:27-74
+44            </intent-filter>
+45        </activity>
+46
+47        <provider
+47-->[androidx.emoji2:emoji2:1.2.0] D:\greadle\gradle_repositury\caches\transforms-4\2d7b0e630be99a8ce3d075e98bb5c89f\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+48            android:name="androidx.startup.InitializationProvider"
+48-->[androidx.emoji2:emoji2:1.2.0] D:\greadle\gradle_repositury\caches\transforms-4\2d7b0e630be99a8ce3d075e98bb5c89f\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+49            android:authorities="com.example.musicplayer.androidx-startup"
+49-->[androidx.emoji2:emoji2:1.2.0] D:\greadle\gradle_repositury\caches\transforms-4\2d7b0e630be99a8ce3d075e98bb5c89f\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+50            android:exported="false" >
+50-->[androidx.emoji2:emoji2:1.2.0] D:\greadle\gradle_repositury\caches\transforms-4\2d7b0e630be99a8ce3d075e98bb5c89f\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+51            <meta-data
+51-->[androidx.emoji2:emoji2:1.2.0] D:\greadle\gradle_repositury\caches\transforms-4\2d7b0e630be99a8ce3d075e98bb5c89f\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+52                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+52-->[androidx.emoji2:emoji2:1.2.0] D:\greadle\gradle_repositury\caches\transforms-4\2d7b0e630be99a8ce3d075e98bb5c89f\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+53                android:value="androidx.startup" />
+53-->[androidx.emoji2:emoji2:1.2.0] D:\greadle\gradle_repositury\caches\transforms-4\2d7b0e630be99a8ce3d075e98bb5c89f\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+54            <meta-data
+54-->[androidx.lifecycle:lifecycle-process:2.6.2] D:\greadle\gradle_repositury\caches\transforms-4\b4f72228c13662e61a0b497c8a81c13c\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+55                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+55-->[androidx.lifecycle:lifecycle-process:2.6.2] D:\greadle\gradle_repositury\caches\transforms-4\b4f72228c13662e61a0b497c8a81c13c\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+56                android:value="androidx.startup" />
+56-->[androidx.lifecycle:lifecycle-process:2.6.2] D:\greadle\gradle_repositury\caches\transforms-4\b4f72228c13662e61a0b497c8a81c13c\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+57            <meta-data
+57-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+58                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+58-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+59                android:value="androidx.startup" />
+59-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+60        </provider>
+61
+62        <receiver
+62-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+63            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+63-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+64            android:directBootAware="false"
+64-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+65            android:enabled="true"
+65-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+66            android:exported="true"
+66-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+67            android:permission="android.permission.DUMP" >
+67-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+68            <intent-filter>
+68-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+69                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+69-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+69-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+70            </intent-filter>
+71            <intent-filter>
+71-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+72                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+72-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+72-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+73            </intent-filter>
+74            <intent-filter>
+74-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+75                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+75-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+75-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+76            </intent-filter>
+77            <intent-filter>
+77-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+78                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+78-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+78-->[androidx.profileinstaller:profileinstaller:1.3.1] D:\greadle\gradle_repositury\caches\transforms-4\3d6aadfdf334cae8c4cdc4c0b6b742a4\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+79            </intent-filter>
+80        </receiver>
+81    </application>
+82
+83</manifest>

@@ -1,0 +1,166 @@
+[
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_play_in_order.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\play_in_order.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_pause.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\pause.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_sound.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\sound.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-anydpi\\ic_launcher.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_picture.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\picture.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_single_loop.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\single_loop.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_ic_launcher_background.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\layout_list_item_song.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\layout\\list_item_song.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_playlist.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\playlist.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\xml_data_extraction_rules.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\anim_slide_in_bottom.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\anim\\slide_in_bottom.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_pre.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\pre.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_point.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\point.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_comment.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\comment.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_download.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\download.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\anim_slide_out_top.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\anim\\slide_out_top.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_next.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\next.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\layout_activity_main.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_like_red.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\like_red.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable-nodpi_sky.jpg.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable-nodpi\\sky.jpg"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\xml_backup_rules.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_menu.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\menu.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-anydpi\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.musicplayer.app-debug-4:/drawable_love_play.png.flat",
+        "source": "com.example.musicplayer.app-main-6:/drawable/love_play.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_like.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\like.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_play.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\play.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_list_item_background.xml.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\list_item_background.xml"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_single_cycle.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\single_cycle.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_icon.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\icon.png"
+    },
+    {
+        "merged": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-debug-4:\\drawable_micphone.png.flat",
+        "source": "D:\\greadle\\gradle_repositury\\daemon\\8.6\\com.example.musicplayer.app-main-6:\\drawable\\micphone.png"
+    }
+]
