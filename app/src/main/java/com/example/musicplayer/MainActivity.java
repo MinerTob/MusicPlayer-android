@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.exoplayer2.Player;
 
@@ -331,20 +332,73 @@ public class MainActivity extends AppCompatActivity {
 
     // 添加模式切换方法
     private void updatePlayMode() {
-        currentPlayMode = (currentPlayMode + 1) % modeIcons.length;
+        int nextMode = (currentPlayMode + 1) % modeIcons.length;
 
-        if (currentPlayMode == MODE_FAVORITE) {
-            // 检查是否有收藏的歌曲
+        if (nextMode == MODE_FAVORITE) {
+            // 保留您原有的收藏歌曲检查逻辑
             if (FavoriteManager.getFavorites().isEmpty()) {
                 Toast.makeText(this, "没有收藏的歌曲，已切换回普通模式", Toast.LENGTH_SHORT).show();
-                currentPlayMode = MODE_NORMAL;
+                nextMode = MODE_NORMAL;
+                musicService.setPlayMode(MODE_NORMAL);
+                updatePlayModeIcon();
+                return;
+            }
+
+            // 保留您原有的播放列表收藏歌曲检查
+            boolean hasCollectedSongs = false;
+            for (String displayName : music_list) {
+                String originalName = displayToOriginalMapping.get(displayName);
+                if (FavoriteManager.isFavorite(originalName)) {
+                    hasCollectedSongs = true;
+                    break;
+                }
+            }
+
+            if (!hasCollectedSongs) {
+                Toast.makeText(this, "当前列表没有收藏的歌曲，已切换回普通模式", Toast.LENGTH_SHORT).show();
+                nextMode = MODE_NORMAL;
             } else {
+                // 保留您原有的自动播放逻辑
                 musicService.updateFavoritePlaylist();
+                String currentSong = musicService.getCurrentSongName();
+                if (currentSong == null || currentSong.trim().isEmpty() ||
+                        !FavoriteManager.isFavorite(currentSong)) {
+
+                    // 使用您原有的获取第一首收藏歌曲方式
+                    String firstFavoriteSong = null;
+                    for (String displayName : music_list) {
+                        String originalName = displayToOriginalMapping.get(displayName);
+                        if (FavoriteManager.isFavorite(originalName)) {
+                            firstFavoriteSong = originalName;
+                            break;
+                        }
+                    }
+
+                    if (firstFavoriteSong != null) {
+                        // 调用您原有的播放方法
+                        playMusic(firstFavoriteSong);
+                        // 保留歌手信息和歌词更新逻辑
+                        String singer = LyricManager.getSinger(firstFavoriteSong, this);
+                        tv_singer.setText(singer);
+                        LyricManager.Lyric lyric = LyricManager.getLyric(firstFavoriteSong, this);
+                        if (lyric != null && lyric.lyrics != null && !lyric.lyrics.isEmpty()) {
+                            tv_lyrics.setText(lyric.lyrics.get(0));
+                        }
+                    }
+                }
             }
         }
 
-        musicService.setPlayMode(currentPlayMode);
+        currentPlayMode = nextMode;
+        if (musicService != null) {
+            musicService.setPlayMode(currentPlayMode);
+        }
         updatePlayModeIcon();
+
+        // 保留您原有的列表刷新逻辑
+        if (adpter != null) {
+            ((SongAdapter) adpter).notifyDataSetChanged();
+        }
     }
 
     // 更新模式图标
@@ -413,6 +467,15 @@ public class MainActivity extends AppCompatActivity {
                     FavoriteManager.addFavorite(currentSong, MainActivity.this);
                     btn_like.setImageResource(R.drawable.like_red);
                 }
+
+                // 更新 MusicService 内的收藏列表
+                musicService.updateFavoritePlaylist();
+
+                // 如果列表视图可见，刷新适配器
+                if (isListViewVisible && listView.getAdapter() != null) {
+                    ((SongAdapter) listView.getAdapter()).notifyDataSetChanged();
+                }
+
                 checkFavoriteMode();
             }
         });
