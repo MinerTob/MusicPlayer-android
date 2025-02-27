@@ -16,7 +16,7 @@
 
 ## 快速入门 🚀
 
-1. 将音乐文件放入 `app/src/main/assets/music/`
+1. 将音乐文件(.flac格式)放入 `app/src/main/assets/music/`
 2. 将歌词文件放入 `app/src/main/assets/lyrics/`
 3. 构建并运行应用
 4. 点击播放列表选择歌曲
