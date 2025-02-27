@@ -304,7 +304,11 @@ public class MusicService extends Service {
 
         if (favorites.isEmpty()) {
             // 如果没有收藏歌曲，切换回普通模式
-            setPlayMode(MODE_NORMAL);
+            playMode = MODE_NORMAL;
+            player.setRepeatMode(playMode);
+            if (songChangeListener != null) {
+                songChangeListener.onSongChanged();
+            }
             return;
         }
 
@@ -313,6 +317,11 @@ public class MusicService extends Service {
             if (favorites.contains(fileName)) {
                 favoriteMediaItems.add(item);
             }
+        }
+
+        // 通知 UI 刷新更新后的收藏列表
+        if (songChangeListener != null) {
+            songChangeListener.onSongChanged();
         }
     }
 
