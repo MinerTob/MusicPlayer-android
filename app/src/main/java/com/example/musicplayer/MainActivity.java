@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import androidx.core.content.ContextCompat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -1312,7 +1313,7 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
      * @param cleanType 清理类型描述文本
      */
     private void showConfirmCleanDialog(List<File> files, Dialog parentDialog, String cleanType) {
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("确认清理")
                 .setMessage(String.format("确定要清理%s的 %d 个文件吗？", cleanType, files.size()))
                 .setPositiveButton("确定", (dialogInterface, i) -> {
@@ -1331,7 +1332,14 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
                     checkIfCurrentSongDeleted(files);
                 })
                 .setNegativeButton("取消", null)
-                .show();
+                .create();
+        
+        // 显示对话框
+        dialog.show();
+        
+        // 设置按钮字体颜色为灰色
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this, R.color.gray));
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(this, R.color.gray));
     }
     
     /**
