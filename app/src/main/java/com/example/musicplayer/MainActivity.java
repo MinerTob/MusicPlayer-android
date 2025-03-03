@@ -1,6 +1,7 @@
 package com.example.musicplayer;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +22,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -30,6 +33,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -756,6 +760,9 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
         btn_playWay = (ImageButton) findViewById(R.id.btn_playWay);
         btn_like = (ImageButton) findViewById(R.id.btn_like);
         btn_sync = (ImageButton) findViewById(R.id.btn_sync);  // 添加同步按钮
+        
+        // 初始化缓存清理按钮
+        ImageView btn_point = findViewById(R.id.btn_point);
 
         btn_play.setOnClickListener(listener1);
         btn_pre.setOnClickListener(listener1);
@@ -763,7 +770,10 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
         btn_playList.setOnClickListener(listener1);
         btn_playWay.setOnClickListener(listener1);
         btn_sync.setOnClickListener(listener1);  // 添加同步按钮点击事件
-
+        
+        // 设置缓存清理按钮点击事件
+        btn_point.setOnClickListener(v -> showCacheCleanerDialog());
+        
         btn_like.setEnabled(false); // 一开始禁用收藏按钮
 
         btn_like.setOnClickListener(new View.OnClickListener() {
@@ -1236,6 +1246,115 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
             // 更新UI，让MusicService更新所有UI元素
             musicService.updateSongInfo();
             musicService.updateProgress();
+        }
+    }
+
+    /**
+     * 显示缓存清理对话框
+     * 用户可以选择清理特定的缓存文件或一键清理所有缓存
+     */
+    private void showCacheCleanerDialog() {
+        // 创建对话框
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_cache_cleaner);
+        dialog.setCancelable(true);
+        
+        // 获取对话框中的控件
+        TextView textCacheInfo = dialog.findViewById(R.id.textCacheInfo);
+        ListView listCachedFiles = dialog.findViewById(R.id.listCachedFiles);
+        Button btnCleanSelected = dialog.findViewById(R.id.btnCleanSelected);
+        Button btnCleanAll = dialog.findViewById(R.id.btnCleanAll);
+        Button btnCancel = dialog.findViewById(R.id.btnCancel);
+        
+        // 获取缓存文件列表
+        List<File> cachedFiles = CacheManager.getCachedFiles(this);
+        
+        // 显示缓存信息
+        long totalSize = CacheManager.calculateTotalSize(cachedFiles);
+        textCacheInfo.setText(String.format("已缓存文件: %d 个 (总大小: %s)", 
+                cachedFiles.size(), CacheManager.formatFileSize(totalSize)));
+        
+        // 设置适配器
+        CacheManager.CachedFileAdapter adapter = new CacheManager.CachedFileAdapter(this, cachedFiles);
+        listCachedFiles.setAdapter(adapter);
+        
+        // 设置"清理选中"按钮点击事件
+        btnCleanSelected.setOnClickListener(v -> {
+            List<File> selectedFiles = adapter.getSelectedFiles();
+            if (selectedFiles.isEmpty()) {
+                Toast.makeText(MainActivity.this, "请选择要清理的文件", Toast.LENGTH_SHORT).show();
+            } else {
+                showConfirmCleanDialog(selectedFiles, dialog, "选中");
+            }
+        });
+        
+        // 设置"清理全部"按钮点击事件
+        btnCleanAll.setOnClickListener(v -> {
+            if (cachedFiles.isEmpty()) {
+                Toast.makeText(MainActivity.this, "没有缓存文件可清理", Toast.LENGTH_SHORT).show();
+            } else {
+                showConfirmCleanDialog(cachedFiles, dialog, "全部");
+            }
+        });
+        
+        // 设置"取消"按钮点击事件
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+        
+        // 显示对话框
+        dialog.show();
+    }
+    
+    /**
+     * 显示确认清理对话框
+     * 
+     * @param files 要清理的文件列表
+     * @param parentDialog 父对话框，清理成功后将关闭
+     * @param cleanType 清理类型描述文本
+     */
+    private void showConfirmCleanDialog(List<File> files, Dialog parentDialog, String cleanType) {
+        new AlertDialog.Builder(this)
+                .setTitle("确认清理")
+                .setMessage(String.format("确定要清理%s的 %d 个文件吗？", cleanType, files.size()))
+                .setPositiveButton("确定", (dialogInterface, i) -> {
+                    // 执行清理操作
+                    int deletedCount = CacheManager.deleteFiles(files);
+                    
+                    // 显示结果
+                    Toast.makeText(MainActivity.this, 
+                            String.format("已清理 %d 个文件", deletedCount), 
+                            Toast.LENGTH_SHORT).show();
+                    
+                    // 关闭父对话框
+                    parentDialog.dismiss();
+                    
+                    // 如果正在播放的歌曲被清理，可能需要通知用户
+                    checkIfCurrentSongDeleted(files);
+                })
+                .setNegativeButton("取消", null)
+                .show();
+    }
+    
+    /**
+     * 检查当前播放的歌曲是否在被删除的文件列表中
+     * 
+     * @param deletedFiles 被删除的文件列表
+     */
+    private void checkIfCurrentSongDeleted(List<File> deletedFiles) {
+        if (musicService == null || musicService.getCurrentSongName() == null) {
+            return;
+        }
+        
+        String currentSongName = musicService.getCurrentSongName();
+        
+        // 检查删除的文件中是否包含当前播放的歌曲
+        for (File file : deletedFiles) {
+            String fileName = file.getName();
+            if (fileName.equals(currentSongName) || 
+                    (currentSongName.contains(".") && fileName.contains(currentSongName.substring(0, currentSongName.lastIndexOf("."))))) {
+                // 提示用户当前歌曲缓存已被清理
+                Toast.makeText(this, "注意：当前播放的歌曲缓存已被清理", Toast.LENGTH_LONG).show();
+                return;
+            }
         }
     }
 }

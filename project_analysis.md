@@ -116,6 +116,25 @@
 - `downloadFile(String serverUrl, String filename, File targetFile)` - 下载文件
 - `findBestServerUrl(List<String> urls)` - 找到最佳服务器URL
 
+## 缓存管理功能实现
+
+### 功能特性
+- 支持选择性清理和全量清理
+- 文件类型识别（音乐/歌词）
+- 文件大小格式化显示
+- 滑动查看长列表
+- 快速滚动支持
+
+### 技术实现
+- 使用 `getFilesDir()` 访问内部存储
+- 统一缓存路径：
+  - 音乐文件：`/data/data/com.example.musicplayer/files/music/`
+  - 歌词文件：`/data/data/com.example.musicplayer/files/lyrics/`
+- 优化列表性能：
+  - 使用 ViewHolder 模式
+  - 启用快速滚动
+  - 优化滚动条显示
+
 ## 当前工作流程
 1. MainActivity启动时绑定MusicService
 2. MusicService初始化时读取assets/music目录下和本地存储中的所有音乐文件
@@ -153,3 +172,56 @@
 
 #### 测试结果
 修改后，歌曲名称显示保持稳定，无论是播放状态变化、切换歌曲还是拖动进度条，都能正确显示格式化后的歌曲名称。
+
+### 缓存清理功能实现
+
+#### 功能描述
+点击界面上的point.png按钮，显示缓存清理对话框，用户可以选择性地清理缓存的歌曲和歌词文件，也可以一键清理所有缓存文件。
+
+#### 实现方案
+1. 创建缓存管理器处理文件列表获取和删除操作
+2. 使用对话框展示缓存文件列表，允许用户选择要删除的文件
+3. 提供确认机制防止误操作
+4. 检测并提示当前播放歌曲是否在清理列表中
+
+#### 新增文件和类
+1. `CacheManager.java`：
+   - 静态方法：`getCachedFiles()`、`calculateTotalSize()`、`deleteFiles()`、`formatFileSize()`
+   - 内部类：`CachedFileAdapter` - 处理文件列表的显示和选择状态
+2. 布局文件：
+   - `dialog_cache_cleaner.xml` - 缓存清理对话框布局
+   - `item_cached_file.xml` - 缓存文件列表项布局
+
+#### 修改的文件和方法
+1. `MainActivity.java`：
+   - 新增方法：`showCacheCleanerDialog()` - 显示缓存清理对话框
+   - 新增方法：`showConfirmCleanDialog()` - 显示确认清理对话框
+   - 新增方法：`checkIfCurrentSongDeleted()` - 检查当前播放歌曲是否被清理
+   - 修改`initView()`方法，添加btn_point按钮的点击事件处理
+
+#### 调用方法
+```java
+// 在MainActivity中
+// 1. 初始化缓存清理按钮并设置点击事件
+ImageView btn_point = findViewById(R.id.btn_point);
+btn_point.setOnClickListener(v -> showCacheCleanerDialog());
+
+// 2. 显示缓存清理对话框
+private void showCacheCleanerDialog() {
+    // 创建对话框并设置布局
+    final Dialog dialog = new Dialog(this);
+    dialog.setContentView(R.layout.dialog_cache_cleaner);
+    
+    // 获取缓存文件列表
+    List<File> cachedFiles = CacheManager.getCachedFiles(this);
+    
+    // 显示文件列表并设置按钮事件
+    // ...
+}
+
+// 3. 执行文件清理操作
+int deletedCount = CacheManager.deleteFiles(selectedFiles);
+```
+
+#### 测试结果
+功能实现后，用户可以通过点击point.png按钮查看和管理缓存文件，支持选择性清理和全量清理，并在删除当前播放的歌曲缓存时给予用户提示。

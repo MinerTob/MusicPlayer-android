@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/titleCacheCleaner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="缓存清理"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/textCacheInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="已缓存文件: 加载中..."
+        android:textSize="14sp"
+        android:padding="8dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:fillViewport="true">
+
+        <ListView
+            android:id="@+id/listCachedFiles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:fastScrollEnabled="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="8dp" />
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnCleanSelected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="清理选中文件"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnCleanAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="清理全部缓存"
+            android:layout_marginStart="4dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="取消"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>
