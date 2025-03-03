@@ -11,14 +11,15 @@
 - 🔄 智能播放模式（列表循环/单曲循环/收藏循环）
 - ❤️ 收藏管理系统（支持动态同步）
 - 🎨 Material Design 交互界面
-- 📂 原生音乐文件管理（assets 集成）
+- 🌐 HTTP服务器音乐文件同步（自动检测最佳服务器）
+- 📂 本地音乐文件缓存（优先播放下载文件，无下载自动回退至assets）
 - 🎤 歌手信息智能匹配
 
 ## 快速入门 🚀
 
-1. 将音乐文件(.flac格式)放入 `app/src/main/assets/music/`
-2. 将歌词文件放入 `app/src/main/assets/lyrics/`
-3. 构建并运行应用
+1. 将音乐文件(.flac, .mp3等格式)放入服务器对应目录
+2. 将歌词文件(.lrc格式)放入服务器对应目录
+3. 构建并运行应用，应用会自动同步音乐和歌词文件
 4. 点击播放列表选择歌曲
 5. 使用控制面板管理播放
 
@@ -26,6 +27,7 @@
 - 点击列表项自动跳转对应歌曲
 - 收藏循环模式下自动过滤非收藏歌曲
 - 播放中途修改收藏列表自动切换模式
+- 智能服务器地址检测（支持模拟器和真机运行环境）
 
 ## 技术亮点 ✨
 
@@ -69,6 +71,41 @@
   }
   ```
 
+### 文件同步系统
+- 多服务器地址智能切换：
+  ```java
+  // FileSyncManager.java
+  private static final String[] SERVER_URLS = {
+      "http://minertob.s.odn.cc",  // 主服务器
+      "http://10.0.2.2:3000"       // 模拟器环境备选
+  };
+  ```
+  你可以选择自己制作歌曲部署局域网或公网服务器，只要你的歌曲歌词文件满足assets/music/和assets/lyrics/格式
+  
+- HTTP目录列表解析：
+  ```java
+  // FileSyncManager.java
+  // 三种模式匹配不同服务器的目录列表格式
+  Pattern pattern1 = Pattern.compile("<a href=\"([^\"]+\\.(mp3|flac|m4a|wav|ogg|lrc|txt))\">");
+  Pattern pattern2 = Pattern.compile("href=\"([^\"]+\\.(mp3|flac|m4a|wav|ogg|lrc|txt))\"");
+  Pattern pattern3 = Pattern.compile("<a href=\"([^\"]+)\"");
+  ```
+
+### UI优化
+- 歌曲名称智能处理：
+  ```java
+  // MainActivity.java
+  public void updateSongName(String songName) {
+      // 检查文件名是否包含扩展名
+      int dotIndex = songName.lastIndexOf(".");
+      if (dotIndex > 0) {
+          // 去掉文件名后缀，并将下划线替换为空格
+          songName = songName.substring(0, dotIndex).replace("_", " ");
+      }
+      tv_songName.setText(songName);
+  }
+  ```
+
 ## 项目结构 📂
 MelodyFlow/
 > app/
@@ -77,7 +114,12 @@ MelodyFlow/
 > > > > java/com/example/musicplayer/
 > > > > > FavoriteManager.java       # 收藏管理核心
 > > > > > > isFavorite()             # 收藏状态判断
-> > > > > > add/removeFavorite()      # 收藏操作
+> > > > > > add/removeFavorite()     # 收藏操作
+> > > > 
+> > > > > FileSyncManager.java       # 文件同步核心
+> > > > > > syncFiles()              # 文件同步入口
+> > > > > > downloadFile()           # 文件下载功能
+> > > > > > findBestServerUrl()      # 服务器选择策略
 > > > > 
 > > > > > LyricManager.java          # 歌词管理核心
 > > > > > > Lyric 内部类             # 歌词数据容器
@@ -88,58 +130,48 @@ MelodyFlow/
 > > > > > > 播放控制逻辑             # 播放/暂停/切歌
 > > > > > > 收藏同步机制             # updateFavoriteIcon()
 > > > > > > 播放列表管理             # SongAdapter
+> > > > > > 文件同步UI               # textSyncStatus, progressSync
 > > > > 
 > > > > > MusicService.java          # 后台服务
 > > > > > > ExoPlayer 集成           # 播放器核心
 > > > > > > 播放模式管理             # 单曲/列表循环
 > > > > > > getCurrentSongName()     # 获取当前曲目
+> > > > > > updateSongInfo()         # 歌曲信息更新
 > > > > 
 > > > > res/
 > > > > > layout/
 > > > > > > activity_main.xml        # 主界面布局
-> > > > > > list_item_song.xml        # 歌曲列表项布局  
+> > > > > > list_item_song.xml       # 歌曲列表项布局  
 > > > > > anim/
-> > > > > > slide_out_top.xml         # 列表关闭动画
-> > > > > drawable/                  # 图标资源
-> > > > > > like.png                 # 未收藏图标
-> > > > > > like_red.png             # 已收藏图标
-> > > > > values/                   # 样式/字符串
-> > > > 
-> > > > assets/
-> > > > > music/                   # 音频资源(.mp3)
-> > > > > lyrics/                  # 歌词文件(.lrc)
-> > > > 
-> > > > AndroidManifest.xml        # 应用配置
-> > > > > 服务声明                 # MusicService
-> > > > > 存储权限                 # READ_EXTERNAL_STORAGE
-> > > 
-> > > build.gradle.kts             # 模块配置
-> > > > 依赖声明                  # ExoPlayer/约束布局
 
-> gradle/                       # 工程级配置
-> build.gradle.kts              
-> settings.gradle.kts
+## 更新日志 📝
 
-## 安装部署 📲
-### 从源码运行
-1. 克隆仓库
-   ```bash
-   git clone https://github.com/MinerTob/android-MusicPlayer
-   ```
-2. 使用 Android Studio 打开项目
-3. 添加音乐文件至 `app/src/main/assets/music/`
-4. 运行 `app` 模块
+### v1.4.0 (2025-03-02)
+- ✨ 新增HTTP服务器文件同步系统
+- 🔄 优化服务器地址自动切换机制
+- 🛠️ 修复歌曲名称显示不稳定问题
+- 🔧 优化播放模式和收藏系统逻辑
+- 📱 改进UI响应性和歌词同步
 
-### 扩展开发
-- 新增播放模式需修改 `MusicService.java`
-- 修改收藏逻辑请参考 `FavoriteManager.java`
-- 更新界面动画请调整 `res/anim/` 资源
+### v1.3.0
+- 添加收藏系统
+- 增强播放模式选择
+- 优化UI响应速度
 
-## 开源协议 📜
-本项目采用 MIT 协议，音乐文件仅供学习交流，商业使用请遵守版权法规。
+### v1.2.0
+- 添加歌词显示功能
+- 改进播放控制逻辑
+- 优化内存使用
 
-## 致谢
+### v1.0.0
+- 初始版本发布
+- 基本音乐播放功能
+- 播放列表管理
 
-在这个快节奏的时代，我们希望通过《MusicPlayer》唤起你对音乐的那份纯真与热爱。愿每一次音符的跳动都能触动你心灵深处最柔软的一隅，让音乐成为你生活中最美的风景。
+## 开发者 👨‍💻
 
-愿你在音乐与代码的世界里，找到属于自己的快乐与自由！
+MinerTob Team - [在GitHub上查看更多项目](https://github.com/MinerTob)
+
+## 许可证 📄
+
+本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
