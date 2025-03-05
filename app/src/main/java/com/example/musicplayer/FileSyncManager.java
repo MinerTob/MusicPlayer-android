@@ -40,7 +40,7 @@ public class FileSyncManager {
     public static final String[] LYRIC_EXTENSIONS = { ".lrc", ".txt" };
     // 可用的服务器URL列表
     private static final String[] SERVER_URLS = {
-        "http://minertob.s.odn.cc",      // 本地服务器
+        "https://minertob.onrender.com",      // 本地服务器
     };
     
     // 首选URL存储键
@@ -299,13 +299,13 @@ public class FileSyncManager {
         
         if (isEmulator) {
             // 模拟器优先使用10.0.2.2
-            prioritizedUrls.add("http://minertob.s.odn.cc");
-            prioritizedUrls.add("http://minertob.s.odn.cc");
+            prioritizedUrls.add("https://minertob.onrender.com");
+            prioritizedUrls.add("https://minertob.onrender.com");
         } else {
             // 真机优先使用127.0.0.1和局域网地址
-            prioritizedUrls.add("http://minertob.s.odn.cc");
-            prioritizedUrls.add("http://minertob.s.odn.cc");
-            prioritizedUrls.add("http://minertob.s.odn.cc");
+            prioritizedUrls.add("https://minertob.onrender.com");
+            prioritizedUrls.add("https://minertob.onrender.com");
+            prioritizedUrls.add("https://minertob.onrender.com");
         }
         
         // 添加其他未包含的SERVER_URLS中的地址
