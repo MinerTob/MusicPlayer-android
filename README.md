@@ -18,6 +18,7 @@
   - 大小格式化显示
   - 滑动查看长列表
   - 快速滚动支持
+  - 音乐与歌词文件关联管理
 - 🎤 歌手信息智能匹配
 
 ## 快速入门 🚀
@@ -33,6 +34,7 @@
 - 收藏循环模式下自动过滤非收藏歌曲
 - 播放中途修改收藏列表自动切换模式
 - 智能服务器地址检测（支持模拟器和真机运行环境）
+- 缓存管理支持音乐与歌词文件关联清理
 
 ## 技术亮点 ✨
 
@@ -81,8 +83,7 @@
   ```java
   // FileSyncManager.java
   private static final String[] SERVER_URLS = {
-      "http://minertob.s.odn.cc",  // 主服务器
-      "http://10.0.2.2:3000"       // 模拟器环境备选
+      "https://minertob.onrender.com",  // 主服务器
   };
   ```
   你可以选择自己制作歌曲部署局域网或公网服务器，只要你的歌曲歌词文件满足assets/music/和assets/lyrics/格式
@@ -94,7 +95,25 @@
   Pattern pattern1 = Pattern.compile("<a href=\"([^\"]+\\.(mp3|flac|m4a|wav|ogg|lrc|txt))\">");
   Pattern pattern2 = Pattern.compile("href=\"([^\"]+\\.(mp3|flac|m4a|wav|ogg|lrc|txt))\"");
   Pattern pattern3 = Pattern.compile("<a href=\"([^\"]+)\"");
-  ```
+  
+  // CacheManager.java
+  public static class SongFileGroup {
+      private final String displayName;
+      private final File musicFile;
+      private final File lyricFile;
+    
+      // 获取总大小（包含歌词文件）
+      public long getTotalSize() {
+          long size = 0;
+          if (musicFile != null) {
+             size += musicFile.length();
+          }
+          if (lyricFile != null) {
+             size += lyricFile.length();
+          }
+          return size;
+      }
+  }
 
 ### UI优化
 - 歌曲名称智能处理：
@@ -158,6 +177,7 @@ MelodyFlow/
 - 🔧 优化播放模式和收藏系统逻辑
 - 📱 改进UI响应性和歌词同步
 - 🧹 新增缓存管理功能，支持选择性清理和全量清理缓存文件
+- 📂 实现音乐与歌词文件关联管理，删除音乐时自动删除对应歌词
 
 ### v1.3.0
 - 添加收藏系统
@@ -176,7 +196,7 @@ MelodyFlow/
 
 ## 开发者 👨‍💻
 
-MinerTob Team - [在GitHub上查看更多项目](https://github.com/MinerTob)
+MinerTob - [在GitHub上查看更多项目](https://github.com/MinerTob)
 
 ## 许可证 📄
 
@@ -187,6 +207,6 @@ MinerTob Team - [在GitHub上查看更多项目](https://github.com/MinerTob)
 
 ## 致谢
 
-在这个快节奏的时代，我们希望通过《MusicPlayer》唤起你对音乐的那份纯真与热爱。愿每一次音符的跳动都能触动你心灵深处最柔软的一隅，让音乐成为你生活中最美的风景。
+在这个快节奏的时代，我们希望通过《音径播放器》唤起你对音乐的那份纯真与热爱。愿每一次音符的跳动都能触动你心灵深处最柔软的一隅，让音乐成为你生活中最美的风景。
 
 愿你在音乐与代码的世界里，找到属于自己的快乐与自由！
