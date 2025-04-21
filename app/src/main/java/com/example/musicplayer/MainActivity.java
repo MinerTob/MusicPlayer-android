@@ -811,7 +811,7 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
 
         listView = (ListView) findViewById(R.id.lv_music);
 
-        layout = (ConstraintLayout) findViewById(R.id.constrainLayout);
+        layout = (ConstraintLayout) findViewById(R.id.main_layout); // 修正为最新id
 
         layout.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
@@ -888,6 +888,14 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
         progressSync = findViewById(R.id.progressSync);
         textSyncStatus.setVisibility(View.GONE);
         progressSync.setVisibility(View.GONE);
+
+        // 初始化主题切换按钮，添加可点击并测试Toast
+        ImageButton btn_styling = findViewById(R.id.btn_styling);
+        btn_styling.setClickable(true);
+        btn_styling.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ThemeSelectionActivity.class);
+            startActivity(intent);
+        });
     }
 
     // 刷新音乐列表
@@ -1068,6 +1076,11 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
     @Override
     protected void onResume() {
         super.onResume();
+        // 读取 SharedPreferences 中的主题设置，并切换背景
+        SharedPreferences themePrefs = getSharedPreferences("app_theme", MODE_PRIVATE);
+        String themeBg = themePrefs.getString("theme_bg", "sky");
+        setMainBackground(themeBg);
+
         // 如果服务已绑定且音乐正在播放，恢复进度更新
         if (serviceBound && musicService != null) {
             // 恢复进度更新
@@ -1113,6 +1126,8 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
         if (currentPlayMode == MODE_FAVORITE) {
             // 检查是否还有收藏歌曲
             Set<String> favorites = FavoriteManager.getFavorites();
+            
+            // 检查是否有收藏的歌曲
             if (favorites.isEmpty()) {
                 Toast.makeText(this, "已没有收藏歌曲，已切换回普通模式", Toast.LENGTH_SHORT).show();
                 currentPlayMode = MODE_NORMAL;
@@ -1363,6 +1378,37 @@ public class MainActivity extends AppCompatActivity implements MusicService.Musi
                 Toast.makeText(this, "注意：当前播放的歌曲缓存已被清理", Toast.LENGTH_LONG).show();
                 return;
             }
+        }
+    }
+
+    /**
+     * XML onClick handler for the styling button declared in XML.
+     * @param view the clicked ImageButton
+     */
+    public void onStylingClick(View view) {
+        Intent intent = new Intent(MainActivity.this, ThemeSelectionActivity.class);
+        startActivity(intent);
+    }
+
+    // 设置主界面背景图片
+    private void setMainBackground(String imageName) {
+        if (layout == null) {
+            layout = findViewById(R.id.main_layout); // ConstraintLayout 根布局 id
+        }
+        int resId = getThemeBgResId(imageName);
+        if (resId != 0) {
+            layout.setBackgroundResource(resId);
+        }
+    }
+
+    // 根据主题名获取对应的背景资源 id
+    private int getThemeBgResId(String imageName) {
+        switch (imageName) {
+            case "aurora":
+                return R.drawable.aurora;
+            case "sky":
+            default:
+                return R.drawable.sky;
         }
     }
 }

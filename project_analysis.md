@@ -225,3 +225,75 @@ int deletedCount = CacheManager.deleteFiles(selectedFiles);
 
 #### 测试结果
 功能实现后，用户可以通过点击point.png按钮查看和管理缓存文件，支持选择性清理和全量清理，并在删除当前播放的歌曲缓存时给予用户提示。
+
+### 添加的函数
+- `onStylingClick(View view)` - 处理主题按钮点击事件，启动 `ThemeSelectionActivity`
+- `onBackButtonClick(View view)` - 处理主题界面返回按钮点击，结束 `ThemeSelectionActivity`
+
+---
+
+## 主要函数与用途总览
+
+### MainActivity.java
+- `initView()`：初始化主界面控件和布局，设置按钮监听。
+- `onCreate(Bundle savedInstanceState)`：Activity创建入口，初始化界面与服务。
+- `onDestroy()`：Activity销毁时资源释放。
+- `updateSongName(String songName)`：格式化并显示当前歌曲名称。
+- `checkFavoriteMode()`：切换收藏模式时检查收藏状态。
+- `updatePlayMode()`：切换并刷新播放模式。
+- `updatePlayModeIcon()`：更新播放模式图标。
+- `updateFavoriteIcon()`：更新收藏按钮图标。
+- `showListView()`：显示歌曲列表。
+- `playMusic(String musicName)`：播放指定歌曲。
+- `playOrPauseMusic()`：播放或暂停当前歌曲。
+- `playNextTrack()`/`playPreviousTrack()`：播放下一首/上一首歌曲。
+- `updateLyricDisplay(String, long)`：根据进度显示歌词。
+- `updateUI()`：统一刷新界面。
+- `showCacheCleanerDialog()`：弹出缓存清理对话框。
+- `showConfirmCleanDialog()`：弹出清理确认对话框。
+- `onStylingClick(View)`：主题按钮点击事件，启动主题选择界面。
+
+### MusicService.java
+- `init()`：初始化ExoPlayer和媒体列表。
+- `isPlaying()`：判断是否正在播放。
+- `play()`/`pause()`：控制播放与暂停。
+- `playMusic(String)`：播放指定歌曲。
+- `playNextTrack()`/`playPreviousTrack()`：播放下一首/上一首。
+- `seekTo(long)`：跳转到指定播放位置。
+- `getCurrentSongName()`：获取当前播放歌曲文件名。
+- `getPlayMode()`/`setPlayMode(int)`：获取/设置播放模式。
+- `updateFavoritePlaylist()`：刷新收藏歌曲列表。
+- `refreshMusicList()`：重新加载本地音乐文件。
+- `updateUiState()`：刷新通知栏与UI。
+- `updateSongInfo(String, String)`：更新歌曲信息。
+
+### LyricManager.java
+- `getLyric(String, Context)`：加载指定歌曲的歌词。
+- `getSinger(String, Context)`：根据歌词文件解析歌手名。
+- `Lyric.findLyricIndex(long)`：根据播放进度查找歌词行。
+
+### FavoriteManager.java
+- `initFavorites(Context)`：初始化收藏数据。
+- `addFavorite(Context, String)`/`removeFavorite(Context, String)`：添加/移除收藏。
+- `getFavorites()`：获取所有收藏歌曲。
+- `clearFavorites(Context)`：清空所有收藏。
+- `saveFavorites(Context)`：保存收藏到本地。
+
+### FileSyncManager.java
+- `startSync()`：启动文件同步。
+- `downloadFile(...)`：下载指定文件。
+- `getCachedFiles(Context)`：获取本地缓存文件列表。
+- `calculateTotalSize(List<File>)`：计算缓存文件总大小。
+
+### ThemeSelectionActivity.java
+- `onCreate(Bundle)`：初始化主题选择界面。
+- `setBackgroundImage(String)`：保存主题背景设置。
+- `onBackButtonClick(View)`：返回按钮事件。
+
+### ThemeAdapter.java
+- `getView(int, View, ViewGroup)`：渲染主题选择项。
+- `getThemePreviewResId(String)`：获取主题预览图资源ID。
+
+---
+
+> 本节持续更新，便于开发者快速查找和理解各函数用途。
